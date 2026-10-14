@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "author": "Douglas Bohmer",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 30, "left": -220, "attrs": {} },
+    { "type": "wokwi-breadboard", "id": "bb", "top": 80, "left": 60, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -120, "left": 100, "attrs": { "temperature": "20", "humidity": "40" } },
+    { "type": "wokwi-led", "id": "verde", "top": -65, "left": 270, "attrs": { "color": "green", "label": "NORMAL" } },
+    { "type": "wokwi-led", "id": "amarelo", "top": -65, "left": 370, "attrs": { "color": "yellow", "label": "ATENCAO" } },
+    { "type": "wokwi-led", "id": "vermelho", "top": -65, "left": 470, "attrs": { "color": "red", "label": "CRITICO" } },
+    { "type": "wokwi-resistor", "id": "rVerde", "top": 15, "left": 270, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rAmarelo", "top": 15, "left": 370, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rVermelho", "top": 15, "left": 470, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "bb:bp.1", "red", [ "h40", "v110" ] ],
+    [ "esp:GND.1", "bb:bn.1", "black", [ "h30", "v100" ] ],
+    [ "bb:bp.3", "dht:VCC", "red", [] ],
+    [ "bb:bn.5", "dht:GND", "black", [] ],
+    [ "dht:SDA", "esp:D15", "blue", [ "v20", "h-310" ] ],
+    [ "esp:D18", "rVerde:2", "green", [ "h30", "v-80" ] ],
+    [ "rVerde:1", "verde:A", "green", [] ],
+    [ "verde:C", "bb:bn.15", "black", [] ],
+    [ "esp:D19", "rAmarelo:2", "gold", [ "h40", "v-100" ] ],
+    [ "rAmarelo:1", "amarelo:A", "gold", [] ],
+    [ "amarelo:C", "bb:bn.25", "black", [] ],
+    [ "esp:D21", "rVermelho:2", "red", [ "h50", "v-120" ] ],
+    [ "rVermelho:1", "vermelho:A", "red", [] ],
+    [ "vermelho:C", "bb:bn.35", "black", [] ]
+  ],
+  "serialMonitor": { "display": "always", "collapse": false, "newline": "lf" },
+  "dependencies": {}
+}
